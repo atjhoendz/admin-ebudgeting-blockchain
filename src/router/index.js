@@ -6,6 +6,7 @@ const TheContainer = () => import('@/containers/TheContainer')
 
 // Views
 const Dashboard = () => import('@/views/Dashboard')
+const Login = () => import('@/views/auth/LoginPage')
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ function configRoutes () {
           component: Dashboard
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 }
