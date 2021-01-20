@@ -16,7 +16,6 @@
           <CDataTable
             :items="items"
             :fields="fields"
-            column-filter
             table-filter
             items-per-page-select
             :items-per-page="5"
