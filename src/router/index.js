@@ -8,6 +8,11 @@ const TheContainer = () => import('@/containers/TheContainer')
 const Dashboard = () => import('@/views/Dashboard')
 const Login = () => import('@/views/auth/LoginPage')
 
+// Data Pengguna
+const DataPengguna = () => import('@/views/data-pengguna/DataPengguna.vue')
+const TambahDataPengguna = () => import('@/views/data-pengguna/TambahData.vue')
+const EditDataPengguna = () => import('@/views/data-pengguna/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +34,28 @@ function configRoutes () {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+      ]
+    },
+    {
+      path: '/data-pengguna',
+      name: 'Data Pengguna',
+      redirect: '/data-pengguna',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataPengguna
+        },
+        {
+          path: 'tambah-data',
+          name: 'Tambah Data Pengguna',
+          component: TambahDataPengguna
+        },
+        {
+          path: 'edit-data',
+          name: 'Edit Data Pengguna',
+          component: EditDataPengguna
         }
       ]
     },

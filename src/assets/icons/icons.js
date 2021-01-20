@@ -71,6 +71,7 @@ import {
   cilPencil,
   cilPeople,
   cilPuzzle,
+  cilPlus,
   cilSettings,
   cilShieldAlt,
   cilSpeech,
@@ -89,6 +90,7 @@ export const iconsSet = Object.assign(
   {},
   { logo },
   {
+    cilPlus,
     cilArrowRight,
     cilBan,
     cilBasket,

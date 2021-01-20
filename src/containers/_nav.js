@@ -119,7 +119,7 @@ export default [
         icon: 'cil-user',
         items: [
           {
-            name: 'Daftar Pengguna',
+            name: 'Lihat Data',
             to: '/data-pengguna'
           },
           {
