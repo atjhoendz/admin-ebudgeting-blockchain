@@ -77,3 +77,40 @@ export const itemsProvinsi = [
   { "nama-provinsi": "Félix Troels" },
   { "nama-provinsi": "Aulus Agmundr" },
 ];
+
+export const itemsKategori = [
+  { "nama-kategori": "Samppa Nori" },
+  { "nama-kategori": "Estavan Lykos" },
+  { "nama-kategori": "Chetan Mohamed" },
+  { "nama-kategori": "Derick Maximinus" },
+  { "nama-kategori": "Friderik Dávid" },
+  { "nama-kategori": "Yiorgos Avraamu" },
+  {
+    "nama-kategori": "Avram Tarasios",
+    _classes: "table-success",
+  },
+  { "nama-kategori": "Quintin Ed" },
+  { "nama-kategori": "Enéas Kwadwo" },
+  { "nama-kategori": "Agapetus Tadeáš" },
+  {
+    "nama-kategori": "Carwyn Fachtna",
+    _classes: "table-info",
+  },
+  { "nama-kategori": "Nehemiah Tatius" },
+  { "nama-kategori": "Ebbe Gemariah" },
+  { "nama-kategori": "Eustorgios Amulius" },
+  { "nama-kategori": "Leopold Gáspár" },
+  { "nama-kategori": "Pompeius René" },
+  { "nama-kategori": "Paĉjo Jadon" },
+  { "nama-kategori": "Micheal Mercurius" },
+  { "nama-kategori": "Ganesha Dubhghall" },
+  { "nama-kategori": "Hiroto Šimun" },
+  { "nama-kategori": "Vishnu Serghei" },
+  { "nama-kategori": "Zbyněk Phoibos" },
+  {
+    "nama-kategori": "Einar Randall",
+    _classes: "table-danger",
+  },
+  { "nama-kategori": "Félix Troels" },
+  { "nama-kategori": "Aulus Agmundr" },
+];

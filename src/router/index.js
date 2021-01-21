@@ -18,6 +18,11 @@ const DataProvinsi = () => import('@/views/data-provinsi/DataProvinsi.vue')
 const TambahDataProvinsi = () => import('@/views/data-provinsi/TambahData.vue')
 const EditDataProvinsi = () => import('@/views/data-provinsi/EditData.vue')
 
+// Data Kategori
+const DataKategori = () => import('@/views/data-kategori/DataKategori.vue')
+const TambahDataKategori = () => import('@/views/data-kategori/TambahData.vue')
+const EditDataKategori = () => import('@/views/data-kategori/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +88,28 @@ function configRoutes () {
           path: 'edit',
           name: 'Edit Data Provinsi',
           component: EditDataProvinsi
+        }
+      ]
+    },
+    {
+      path: '/data-kategori',
+      name: 'Data Kategori',
+      redirect: '/data-kategori',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataKategori
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data Kategori',
+          component: TambahDataKategori
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data Kategori',
+          component: EditDataKategori
         }
       ]
     },

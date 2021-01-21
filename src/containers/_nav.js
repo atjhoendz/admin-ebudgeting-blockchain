@@ -40,7 +40,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-kategori/tambah-data'
+            to: '/data-kategori/tambah'
           }
         ]
       },
