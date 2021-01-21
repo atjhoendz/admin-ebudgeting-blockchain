@@ -23,7 +23,7 @@ const fields = [
 ];
 
 export default {
-  name: "Data Lembaga",
+  name: "DataLembaga",
   components: { CardListData },
   data() {
     return {
