@@ -33,6 +33,11 @@ const DataAnggaran = () => import('@/views/data-anggaran/DataAnggaran.vue')
 const TambahDataAnggaran = () => import('@/views/data-anggaran/TambahData.vue')
 const EditDataAnggaran = () => import('@/views/data-anggaran/EditData.vue')
 
+// Data PMK
+const DataPMK = () => import('@/views/data-pmk/DataPMK.vue')
+const TambahDataPMK = () => import('@/views/data-pmk/TambahData.vue')
+const EditDataPMK = () => import('@/views/data-pmk/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -164,6 +169,28 @@ function configRoutes () {
           path: 'edit',
           name: 'Edit Data Anggaran',
           component: EditDataAnggaran
+        }
+      ]
+    },
+    {
+      path: '/data-pmk',
+      name: 'Data PMK',
+      redirect: '/data-pmk',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataPMK
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data PMK',
+          component: TambahDataPMK
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data PMK',
+          component: EditDataPMK
         }
       ]
     },

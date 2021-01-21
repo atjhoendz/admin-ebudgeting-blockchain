@@ -88,7 +88,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-pmk/tambah-data'
+            to: '/data-pmk/tambah'
           }
         ]
       },

@@ -95,3 +95,29 @@ export const itemsAnggaran = [{
   "nama-lembaga": "Meevee",
   "sisa-anggaran": "6.02"
 }]
+
+export const itemsPMK = [{
+  "nomor-pmk": 61,
+  "tanggal": "02/07/2020"
+}, {
+  "nomor-pmk": 66,
+  "tanggal": "03/21/2020"
+}, {
+  "nomor-pmk": 18,
+  "tanggal": "12/08/2020"
+}, {
+  "nomor-pmk": 40,
+  "tanggal": "05/07/2020"
+}, {
+  "nomor-pmk": 75,
+  "tanggal": "10/02/2020"
+}, {
+  "nomor-pmk": 29,
+  "tanggal": "03/11/2020"
+}, {
+  "nomor-pmk": 90,
+  "tanggal": "10/24/2020"
+}, {
+  "nomor-pmk": 72,
+  "tanggal": "08/16/2020"
+}]
