@@ -33,6 +33,11 @@ const DataAnggaran = () => import('@/views/data-anggaran/DataAnggaran.vue')
 const TambahDataAnggaran = () => import('@/views/data-anggaran/TambahData.vue')
 const EditDataAnggaran = () => import('@/views/data-anggaran/EditData.vue')
 
+// Data Penomoran
+const DataPenomoran = () => import('@/views/data-penomoran/DataPenomoran.vue')
+const TambahDataPenomoran = () => import('@/views/data-penomoran/TambahData.vue')
+const EditDataPenomoran = () => import('@/views/data-penomoran/EditData.vue')
+
 // Data PMK
 const DataPMK = () => import('@/views/data-pmk/DataPMK.vue')
 const TambahDataPMK = () => import('@/views/data-pmk/TambahData.vue')
@@ -169,6 +174,28 @@ function configRoutes () {
           path: 'edit',
           name: 'Edit Data Anggaran',
           component: EditDataAnggaran
+        }
+      ]
+    },
+    {
+      path: '/data-penomoran',
+      name: 'Data Penomoran',
+      redirect: '/data-penomoran',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataPenomoran
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data Penomoran',
+          component: TambahDataPenomoran
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data Penomoran',
+          component: EditDataPenomoran
         }
       ]
     },

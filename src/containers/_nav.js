@@ -104,7 +104,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-penomoran/tambah-data'
+            to: '/data-penomoran/tambah'
           }
         ]
       },
