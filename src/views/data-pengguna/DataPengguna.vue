@@ -29,13 +29,13 @@
             sorter
             pagination
           >
-            <template #proses>
+            <template #proses="{index}">
               <td>
                 <CButtonGroup>
-                  <CButton color="success" to="/data-pengguna/edit-data"
-                    >Edit</CButton
+                  <CButton color="success" :to="editByID(index)">Edit</CButton>
+                  <CButton color="danger" :to="deleteByID(index)"
+                    >Hapus</CButton
                   >
-                  <CButton color="danger">Hapus</CButton>
                 </CButtonGroup>
               </td>
             </template>
@@ -112,6 +112,14 @@ export default {
       }),
       fields,
     };
+  },
+  methods: {
+    editByID(id) {
+      return `/data-pengguna/edit-data?id=${id}`;
+    },
+    deleteByID(id) {
+      return `/data-pengguna/hapus?id=${id}`;
+    },
   },
 };
 </script>
