@@ -13,6 +13,11 @@ const DataPengguna = () => import('@/views/data-pengguna/DataPengguna.vue')
 const TambahDataPengguna = () => import('@/views/data-pengguna/TambahData.vue')
 const EditDataPengguna = () => import('@/views/data-pengguna/EditData.vue')
 
+// Data Provinsi
+const DataProvinsi = () => import('@/views/data-provinsi/DataProvinsi.vue')
+const TambahDataProvinsi = () => import('@/views/data-provinsi/TambahData.vue')
+const EditDataProvinsi = () => import('@/views/data-provinsi/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -48,14 +53,36 @@ function configRoutes () {
           component: DataPengguna
         },
         {
-          path: 'tambah-data',
+          path: 'tambah',
           name: 'Tambah Data Pengguna',
           component: TambahDataPengguna
         },
         {
-          path: 'edit-data',
+          path: 'edit',
           name: 'Edit Data Pengguna',
           component: EditDataPengguna
+        }
+      ]
+    },
+    {
+      path: '/data-provinsi',
+      name: 'Data Provinsi',
+      redirect: '/data-provinsi',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataProvinsi
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data Provinsi',
+          component: TambahDataProvinsi
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data Provinsi',
+          component: EditDataProvinsi
         }
       ]
     },
