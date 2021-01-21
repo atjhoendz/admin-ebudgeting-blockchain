@@ -72,7 +72,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-anggaran/tambah-data'
+            to: '/data-anggaran/tambah'
           }
         ]
       },

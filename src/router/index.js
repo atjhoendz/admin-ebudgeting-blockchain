@@ -28,6 +28,11 @@ const DataLembaga = () => import('@/views/data-lembaga/DataLembaga.vue')
 const TambahDataLembaga = () => import('@/views/data-lembaga/TambahData.vue')
 const EditDataLembaga = () => import('@/views/data-lembaga/EditData.vue')
 
+// Data Anggaran
+const DataAnggaran = () => import('@/views/data-anggaran/DataAnggaran.vue')
+const TambahDataAnggaran = () => import('@/views/data-anggaran/TambahData.vue')
+const EditDataAnggaran = () => import('@/views/data-anggaran/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -137,6 +142,28 @@ function configRoutes () {
           path: 'edit',
           name: 'Edit Data Lembaga',
           component: EditDataLembaga
+        }
+      ]
+    },
+    {
+      path: '/data-anggaran',
+      name: 'Data Anggaran',
+      redirect: '/data-anggaran',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataAnggaran
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data Anggaran',
+          component: TambahDataAnggaran
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data Anggaran',
+          component: EditDataAnggaran
         }
       ]
     },
