@@ -1,15 +1,19 @@
 <template>
-  <list-data
-    :items="items"
-    :fields="fields"
-    :width="5"
-    title="Data Provinsi"
-    routeEndpoint="data-provinsi"
-  ></list-data>
+  <CRow>
+    <CCol sm="12" md="5" lg="5">
+      <card-list-data
+        :items="items"
+        :fields="fields"
+        :width="5"
+        title="Data Provinsi"
+        routeEndpoint="data-provinsi"
+      ></card-list-data>
+    </CCol>
+  </CRow>
 </template>
 
 <script>
-import ListData from "../../components/ListData.vue";
+import CardListData from "../../components/CardListData.vue";
 import { itemsProvinsi } from "../../sample-data/data";
 
 const fields = [
@@ -19,7 +23,7 @@ const fields = [
 ];
 
 export default {
-  components: { ListData },
+  components: { CardListData },
   name: "DataProvinsi",
   data() {
     return {

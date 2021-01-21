@@ -1,10 +1,14 @@
 <template>
-  <list-data
-    :items="items"
-    :fields="fields"
-    title="Data Pengguna"
-    routeEndpoint="data-pengguna"
-  ></list-data>
+  <CRow>
+    <CCol col="12">
+      <card-list-data
+        :items="items"
+        :fields="fields"
+        title="Data Pengguna"
+        routeEndpoint="data-pengguna"
+      ></card-list-data>
+    </CCol>
+  </CRow>
 </template>
 
 <script>
@@ -16,13 +20,13 @@ const fields = [
   { key: "proses", _style: "width:50px" },
 ];
 
-import ListData from "../../components/ListData";
+import CardListData from "../../components/CardListData";
 import { itemsPengguna } from "../../sample-data/data";
 
 export default {
   name: "DataPengguna",
   components: {
-    ListData,
+    CardListData,
   },
   data() {
     return {
