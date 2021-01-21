@@ -23,6 +23,11 @@
             sorter
             pagination
           >
+            <template #no="{index}">
+              <td>
+                {{ index + 1 }}
+              </td>
+            </template>
           </CDataTable>
         </CCardBody>
       </CCard>
@@ -75,6 +80,7 @@ const items = [
 ];
 
 const fields = [
+  { key: "no", _style: "width:10px" },
   { key: "username", _style: "min-width:200px" },
   "registered",
   { key: "role", _style: "min-width:100px" },
