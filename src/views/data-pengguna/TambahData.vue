@@ -28,7 +28,11 @@
     </CRow>
     <CRow>
       <CCol sm="12">
-        <CSelect label="Jabatan" :options="options"></CSelect>
+        <CSelect
+          label="Jabatan"
+          placeholder="Pilih jabatan"
+          :options="options"
+        ></CSelect>
       </CCol>
     </CRow>
     <CButton color="primary"> Simpan </CButton>
