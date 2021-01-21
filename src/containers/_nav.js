@@ -56,7 +56,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-lembaga/tambah-data'
+            to: '/data-lembaga/tambah'
           }
         ]
       },

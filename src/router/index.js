@@ -23,6 +23,11 @@ const DataKategori = () => import('@/views/data-kategori/DataKategori.vue')
 const TambahDataKategori = () => import('@/views/data-kategori/TambahData.vue')
 const EditDataKategori = () => import('@/views/data-kategori/EditData.vue')
 
+// Data Lembaga
+const DataLembaga = () => import('@/views/data-lembaga/DataLembaga.vue')
+const TambahDataLembaga = () => import('@/views/data-lembaga/TambahData.vue')
+const EditDataLembaga = () => import('@/views/data-lembaga/EditData.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -110,6 +115,28 @@ function configRoutes () {
           path: 'edit',
           name: 'Edit Data Kategori',
           component: EditDataKategori
+        }
+      ]
+    },
+    {
+      path: '/data-lembaga',
+      name: 'Data Lembaga',
+      redirect: '/data-lembaga',
+      component: TheContainer,
+      children: [
+        {
+          path: '/',
+          component: DataLembaga
+        },
+        {
+          path: 'tambah',
+          name: 'Tambah Data Lembaga',
+          component: TambahDataLembaga
+        },
+        {
+          path: 'edit',
+          name: 'Edit Data Lembaga',
+          component: EditDataLembaga
         }
       ]
     },

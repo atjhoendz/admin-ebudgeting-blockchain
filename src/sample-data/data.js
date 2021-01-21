@@ -114,3 +114,65 @@ export const itemsKategori = [
   { "nama-kategori": "Félix Troels" },
   { "nama-kategori": "Aulus Agmundr" },
 ];
+
+export const itemsLembaga = [{
+  "nama-lembaga": "Podcat",
+  "jml-anggaran": "2.70"
+}, {
+  "nama-lembaga": "Eazzy",
+  "jml-anggaran": "6.48"
+}, {
+  "nama-lembaga": "Rhyloo",
+  "jml-anggaran": "9.31"
+}, {
+  "nama-lembaga": "Meembee",
+  "jml-anggaran": "6.30"
+}, {
+  "nama-lembaga": "Ailane",
+  "jml-anggaran": "3.01"
+}, {
+  "nama-lembaga": "Yoveo",
+  "jml-anggaran": "1.95"
+}, {
+  "nama-lembaga": "Meevee",
+  "jml-anggaran": "6.02"
+}, {
+  "nama-lembaga": "Tazzy",
+  "jml-anggaran": "6.57"
+}, {
+  "nama-lembaga": "Twitterlist",
+  "jml-anggaran": "5.38"
+}, {
+  "nama-lembaga": "Jatri",
+  "jml-anggaran": "4.47"
+}, {
+  "nama-lembaga": "Ntags",
+  "jml-anggaran": "3.97"
+}, {
+  "nama-lembaga": "Ooba",
+  "jml-anggaran": "8.59"
+}, {
+  "nama-lembaga": "Meezzy",
+  "jml-anggaran": "3.03"
+}, {
+  "nama-lembaga": "Topicblab",
+  "jml-anggaran": "4.55"
+}, {
+  "nama-lembaga": "Feedfish",
+  "jml-anggaran": "9.77"
+}, {
+  "nama-lembaga": "Katz",
+  "jml-anggaran": "2.09"
+}, {
+  "nama-lembaga": "Shufflester",
+  "jml-anggaran": "1.64"
+}, {
+  "nama-lembaga": "Dynabox",
+  "jml-anggaran": "9.62"
+}, {
+  "nama-lembaga": "Jazzy",
+  "jml-anggaran": "2.88"
+}, {
+  "nama-lembaga": "Dynazzy",
+  "jml-anggaran": "8.71"
+}]
