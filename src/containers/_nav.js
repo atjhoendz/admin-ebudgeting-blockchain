@@ -24,7 +24,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-provinsi/tambah-data'
+            to: '/data-provinsi/tambah'
           }
         ]
       },
@@ -124,7 +124,7 @@ export default [
           },
           {
             name: 'Tambah Data',
-            to: '/data-pengguna/tambah-data'
+            to: '/data-pengguna/tambah'
           }
         ]
       },

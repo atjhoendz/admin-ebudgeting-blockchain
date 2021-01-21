@@ -7,14 +7,10 @@
           <CButton
             color="primary"
             class="d-md-down-none"
-            to="/data-pengguna/tambah-data"
+            to="/data-pengguna/tambah"
             >Tambah Data</CButton
           >
-          <CButton
-            color="primary"
-            class="d-lg-none"
-            to="/data-pengguna/tambah-data"
-          >
+          <CButton color="primary" class="d-lg-none" to="/data-pengguna/tambah">
             <CIcon name="cil-plus" />
           </CButton>
         </CCardHeader>
@@ -115,7 +111,7 @@ export default {
   },
   methods: {
     editByID(id) {
-      return `/data-pengguna/edit-data?id=${id}`;
+      return `/data-pengguna/edit?id=${id}`;
     },
     deleteByID(id) {
       return `/data-pengguna/hapus?id=${id}`;
