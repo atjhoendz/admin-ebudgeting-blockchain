@@ -89,7 +89,7 @@ const options = [
 ];
 
 export default {
-  name: "TambahDataPengguna",
+  name: "EditDataPengguna",
   data() {
     return {
       options,

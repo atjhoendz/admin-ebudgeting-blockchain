@@ -1,29 +1,19 @@
 <template>
-  <CRow>
-    <CCol sm="12" md="6" lg="5">
-      <CCard>
-        <CCardHeader class="h4">
-          Form Input Data Provinsi
-        </CCardHeader>
-        <CCardBody>
-          <CRow>
-            <CCol sm="12">
-              <CInput
-                label="Nama Provinsi"
-                placeholder="Masukkan nama provinsi"
-              >
-              </CInput>
-            </CCol>
-          </CRow>
-          <CButton color="primary"> Simpan </CButton>
-        </CCardBody>
-      </CCard>
-    </CCol>
-  </CRow>
+  <card-form title="Form Input Data Provinsi">
+    <CRow>
+      <CCol sm="12">
+        <CInput label="Nama Provinsi" placeholder="Masukkan nama provinsi">
+        </CInput>
+      </CCol>
+    </CRow>
+    <CButton color="primary"> Simpan </CButton>
+  </card-form>
 </template>
 
 <script>
+import CardForm from "../../components/CardForm.vue";
 export default {
+  components: { CardForm },
   name: "TambahDataProvinsi",
   data() {
     return {};
