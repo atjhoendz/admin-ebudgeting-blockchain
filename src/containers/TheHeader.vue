@@ -14,7 +14,7 @@
       <span class="h4">Admin</span>
     </div>
     <CHeaderNav class="d-md-down-none ml-3">
-      <span class="h3">Admin</span>
+      <span class="h3 my-auto">Admin</span>
     </CHeaderNav>
     <CHeaderNav class="mr-4 ml-auto">
       <TheHeaderDropdownAccnt />
