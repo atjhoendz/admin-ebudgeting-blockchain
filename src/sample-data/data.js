@@ -123,27 +123,66 @@ export const itemsPenomoran = [{
 }]
 
 export const itemsPMK = [{
-  "nomor-pmk": 61,
-  "tanggal": "02/07/2020"
+  "kategori-pmk": "Karolina",
+  "jns-pmk": "Bernette",
+  "tahun": 2005,
+  "asal": "Portugal",
+  "tujuan": "Brazil",
+  "provinsi": "Tajikistan",
+  "satuan": "Euro",
+  "biaya": "9208842.16"
 }, {
-  "nomor-pmk": 66,
-  "tanggal": "03/21/2020"
+  "kategori-pmk": "Arie",
+  "jns-pmk": "Charis",
+  "tahun": 2006,
+  "asal": "Argentina",
+  "tujuan": "Indonesia",
+  "provinsi": "China",
+  "satuan": "Peso",
+  "biaya": "1057024.40"
 }, {
-  "nomor-pmk": 18,
-  "tanggal": "12/08/2020"
+  "kategori-pmk": "Camille",
+  "jns-pmk": "Eduardo",
+  "tahun": 1986,
+  "asal": "United States",
+  "tujuan": "Argentina",
+  "provinsi": "Philippines",
+  "satuan": "Dollar",
+  "biaya": "8657202.63"
 }, {
-  "nomor-pmk": 40,
-  "tanggal": "05/07/2020"
+  "kategori-pmk": "Tyson",
+  "jns-pmk": "Marquita",
+  "tahun": 2012,
+  "asal": "China",
+  "tujuan": "United States",
+  "provinsi": "Norway",
+  "satuan": "Yuan Renminbi",
+  "biaya": "9658391.28"
 }, {
-  "nomor-pmk": 75,
-  "tanggal": "10/02/2020"
+  "kategori-pmk": "Phyllida",
+  "jns-pmk": "Ardith",
+  "tahun": 2002,
+  "asal": "Poland",
+  "tujuan": "China",
+  "provinsi": "Indonesia",
+  "satuan": "Zloty",
+  "biaya": "7673935.93"
 }, {
-  "nomor-pmk": 29,
-  "tanggal": "03/11/2020"
+  "kategori-pmk": "Burk",
+  "jns-pmk": "Carlota",
+  "tahun": 1994,
+  "asal": "China",
+  "tujuan": "Poland",
+  "provinsi": "Argentina",
+  "satuan": "Yuan Renminbi",
+  "biaya": "8921944.46"
 }, {
-  "nomor-pmk": 90,
-  "tanggal": "10/24/2020"
-}, {
-  "nomor-pmk": 72,
-  "tanggal": "08/16/2020"
+  "kategori-pmk": "Reinhard",
+  "jns-pmk": "Barnard",
+  "tahun": 2007,
+  "asal": "Philippines",
+  "tujuan": "Zambia",
+  "provinsi": "China",
+  "satuan": "Peso",
+  "biaya": "6889491.36"
 }]

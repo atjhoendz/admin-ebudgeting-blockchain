@@ -1,6 +1,6 @@
 <template>
   <CRow>
-    <CCol sm="12" md="7" lg="7">
+    <CCol col="12">
       <card-list-data
         title="Data PMK"
         :fields="fields"
@@ -17,8 +17,14 @@ import { itemsPMK } from "../../sample-data/data";
 
 const fields = [
   { key: "no", _style: "width:10px" },
-  { key: "nomor-pmk", _style: "min-width:200px" },
-  { key: "tanggal", _style: "min-width:200px" },
+  "kategori-pmk",
+  "jns-pmk",
+  "tahun",
+  "asal",
+  "tujuan",
+  "provinsi",
+  "satuan",
+  "biaya",
   { key: "proses", _style: "width:50px" },
 ];
 
