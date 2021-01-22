@@ -1,9 +1,9 @@
 name: Daily project check
 
-# on:
-#   schedule:
-# build runs every weekday at 5AM UTC
-# - cron: '0 5 * * 1-5'
+on:
+  schedule:
+build runs every weekday at 5AM UTC
+- cron: '0 5 * * 1-5'
 
 jobs:
   build:
