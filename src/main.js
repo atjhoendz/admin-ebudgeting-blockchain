@@ -1,14 +1,18 @@
-import 'core-js/stable'
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import CoreuiVue from '@coreui/vue'
-import { iconsSet as icons } from './assets/icons/icons.js'
-import store from './store'
+import 'core-js/stable';
+import Vue from 'vue';
+import App from './App';
+import router from './router';
+import CoreuiVue from '@coreui/vue';
+import { iconsSet as icons } from './assets/icons/icons.js';
+import store from './store';
+import vueCookies from 'vue-cookies';
+import 'core-js';
+import 'regenerator-runtime/runtime';
 
-Vue.config.performance = true
-Vue.use(CoreuiVue)
-Vue.prototype.$log = console.log.bind(console)
+Vue.config.performance = true;
+Vue.use(CoreuiVue);
+Vue.use(vueCookies);
+Vue.prototype.$log = console.log.bind(console);
 
 new Vue({
   el: '#app',
@@ -17,6 +21,6 @@ new Vue({
   icons,
   template: '<App/>',
   components: {
-    App
-  }
-})
+    App,
+  },
+});

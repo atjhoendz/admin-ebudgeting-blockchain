@@ -3,13 +3,15 @@
     <template #toggler-content>
       <span class="h4" style="color: #3c4b64">Armando</span>
     </template>
-    <CDropdownItem> <CIcon name="cil-lock-locked" /> Logout </CDropdownItem>
+    <CDropdownItem to="login">
+      <CIcon name="cil-lock-locked" /> Logout
+    </CDropdownItem>
   </CDropdown>
 </template>
 
 <script>
 export default {
-  name: "TheHeaderDropdownAccnt",
+  name: 'TheHeaderDropdownAccnt',
   data() {
     return {
       itemsCount: 42,

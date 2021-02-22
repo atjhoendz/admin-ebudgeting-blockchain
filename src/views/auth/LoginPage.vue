@@ -11,14 +11,18 @@
         </CCol>
       </CRow>
       <CRow class="justify-content-center">
-        <CCol md="4">
+        <CCol md="6" lg="5" sm="10" col="12">
           <CCardGroup>
             <CCard class="p-4">
               <CCardBody>
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
-                  <CInput placeholder="Username" autocomplete="username">
+                  <CInput
+                    placeholder="Username"
+                    autocomplete="username"
+                    v-model="username"
+                  >
                     <template #prepend-content
                       ><CIcon name="cil-user"
                     /></template>
@@ -27,6 +31,8 @@
                     placeholder="Password"
                     type="password"
                     autocomplete="curent-password"
+                    v-model="password"
+                    @keyup.enter="makeLogin"
                   >
                     <template #prepend-content
                       ><CIcon name="cil-lock-locked"
@@ -34,7 +40,7 @@
                   </CInput>
                   <CRow>
                     <CCol col="6" class="text-left">
-                      <CButton color="primary" class="px-4" to="/"
+                      <CButton color="primary" class="px-4" @click="makeLogin"
                         >Login</CButton
                       >
                     </CCol>
@@ -50,7 +56,29 @@
 </template>
 
 <script>
+import { AuthService } from '@/services/auth.service';
+
 export default {
-  name: "Login",
+  name: 'Login',
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+
+  methods: {
+    async makeLogin() {
+      try {
+        await AuthService.makeLogin({
+          username: this.username,
+          password: this.password,
+        });
+        await this.$router.push('/');
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
