@@ -47,6 +47,7 @@ export const routes = [
     redirect: '/dashboard',
     name: 'Home',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: 'dashboard',
@@ -60,6 +61,7 @@ export const routes = [
     name: 'Data Pengguna',
     redirect: '/data-pengguna',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',

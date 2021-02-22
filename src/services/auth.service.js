@@ -18,8 +18,6 @@ export class AuthService {
         exp: parseTokenData(response.data.data.accessToken).exp,
       });
 
-      console.log(response.data.data.accessToken);
-
       return response.data;
     } catch (err) {
       throw new Error(err);
@@ -41,6 +39,7 @@ export class AuthService {
       return response.data;
     } catch (err) {
       console.log(err.response.status);
+      _resetAuthData();
       $router.push({ name: 'Login' }).catch(() => {});
     }
   }
@@ -102,13 +101,16 @@ export function parseTokenData(accessToken) {
   return tokenData;
 }
 
-// function _resetAuthData() {
-//   $store.commit('auth/SET_ACCESS_TOKEN', null);
-//   $store.commit('auth/SET_REFRESH_TOKEN', null);
-// }
+function _resetAuthData() {
+  $store.commit('auth/SET_ACCESS_TOKEN', null);
+  $store.commit('auth/SET_REFRESH_TOKEN', null);
+
+  AuthService.setRefreshToken('');
+}
 
 function _setAuthData({ accessToken, refreshToken = null, exp } = {}) {
   $store.commit('auth/SET_ACCESS_TOKEN', accessToken);
   if (refreshToken) $store.commit('auth/SET_REFRESH_TOKEN', refreshToken);
   $store.commit('auth/SET_ATOKEN_EXP_DATE', exp);
+  AuthService.setRefreshToken('true');
 }

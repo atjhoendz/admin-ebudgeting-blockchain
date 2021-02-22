@@ -38,7 +38,6 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
     "@babel/plugin-transform-regenerator": "^7.12.13",
-    "@babel/polyfill": "^7.12.1",
     "@vue/cli-plugin-babel": "^4.5.9",
     "@vue/cli-plugin-e2e-nightwatch": "^4.5.9",
     "@vue/cli-plugin-eslint": "^4.5.9",

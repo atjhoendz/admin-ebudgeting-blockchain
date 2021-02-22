@@ -72,8 +72,6 @@ export default {
     };
   },
   methods: {},
-  mounted() {
-    this.message = this.$store.state.auth.accessToken;
-  },
+  mounted() {},
 };
 </script>

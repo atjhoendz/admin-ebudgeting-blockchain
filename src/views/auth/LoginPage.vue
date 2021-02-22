@@ -40,7 +40,12 @@
                   </CInput>
                   <CRow>
                     <CCol col="6" class="text-left">
-                      <CButton color="primary" class="px-4" @click="makeLogin"
+                      <CSpinner color="info" v-if="showLoading" />
+                      <CButton
+                        color="primary"
+                        class="px-4"
+                        @click="makeLogin"
+                        v-if="!showLoading"
                         >Login</CButton
                       >
                     </CCol>
@@ -64,11 +69,13 @@ export default {
     return {
       username: '',
       password: '',
+      showLoading: false,
     };
   },
 
   methods: {
     async makeLogin() {
+      this.showLoading = !this.showLoading;
       try {
         await AuthService.makeLogin({
           username: this.username,
