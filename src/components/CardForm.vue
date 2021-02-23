@@ -6,7 +6,9 @@
           {{ title }}
         </CCardHeader>
         <CCardBody>
-          <slot></slot>
+          <CForm>
+            <slot></slot>
+          </CForm>
         </CCardBody>
       </CCard>
     </CCol>
@@ -15,7 +17,7 @@
 
 <script>
 export default {
-  name: "CardForm",
+  name: 'CardForm',
   props: {
     title: {
       type: String,

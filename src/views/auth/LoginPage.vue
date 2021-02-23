@@ -18,6 +18,7 @@
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
+                  <p class="text-danger">{{ message }}</p>
                   <CInput
                     placeholder="Username"
                     autocomplete="username"
@@ -70,6 +71,7 @@ export default {
       username: '',
       password: '',
       showLoading: false,
+      message: '',
     };
   },
 
@@ -81,9 +83,14 @@ export default {
           username: this.username,
           password: this.password,
         });
+        this.showLoading = false;
         await this.$router.push('/');
       } catch (err) {
-        console.log(err);
+        this.showLoading = false;
+        if (err.response.data.statusCode == 401) {
+          this.message =
+            'Login tidak berhasil. Periksa kembali username/password anda.';
+        }
       }
     },
   },

@@ -25,6 +25,7 @@
         table-filter
         items-per-page-select
         :items-per-page="5"
+        :loading="isLoading"
         hover
         sorter
         pagination
@@ -49,7 +50,7 @@
 
 <script>
 export default {
-  name: "CardListData",
+  name: 'CardListData',
   props: {
     title: {
       type: String,
@@ -75,10 +76,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     urlTambahData: function() {
-      return this.routeEndpoint + "/tambah";
+      return this.routeEndpoint + '/tambah';
     },
   },
   methods: {

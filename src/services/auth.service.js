@@ -5,6 +5,7 @@ import $router from '../router';
 
 export class AuthService {
   static async makeLogin({ username, password }) {
+    // eslint-disable-next-line no-useless-catch
     try {
       const response = await axios.post(
         `${API_URL}/auth/login`,
@@ -20,14 +21,14 @@ export class AuthService {
 
       return response.data;
     } catch (err) {
-      throw new Error(err);
+      throw err;
     }
   }
 
   static async refreshToken() {
     try {
       const response = await axios.get(`${API_URL}/auth/refresh`, {
-        headers: { Authorization: `Bearer ${$store.state.refreshToken}` },
+        headers: { Authorization: `Bearer ${$store.state.auth.refreshToken}` },
       });
 
       _setAuthData({
@@ -49,7 +50,7 @@ export class AuthService {
   }, 100);
 
   static getBearer() {
-    return `Bearer ${$store.state.accessToken}`;
+    return `Bearer ${$store.state.auth.accessToken}`;
   }
 
   static isAccessTokenExpired() {

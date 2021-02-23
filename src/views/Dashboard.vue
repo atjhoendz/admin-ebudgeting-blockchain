@@ -9,9 +9,10 @@
     <CCol col="12">
       <card-list-data
         :fields="fields"
-        :items="items"
+        :items="dataUser"
         :showProses="false"
         :showButton="false"
+        :isLoading="isLoading"
         title="Data Pengguna"
         routeEndpoint="data-pengguna"
       >
@@ -22,13 +23,13 @@
 
 <script>
 import CardListData from '../components/CardListData.vue';
-import { itemsPengguna } from '../sample-data/data';
+import { UsersService } from '../services/user.service';
 
 const fields = [
   { key: 'no', _style: 'width:10px' },
-  { key: 'username', _style: 'min-width:200px' },
-  'registered',
-  { key: 'role', _style: 'min-width:100px' },
+  { key: 'nama_lengkap', label: 'Nama', _style: 'min-width:200px' },
+  { key: 'nip', label: 'NIP' },
+  { key: 'jabatan', _style: 'min-width:100px' },
 ];
 
 const dataDashboard = [
@@ -64,14 +65,23 @@ export default {
   data() {
     return {
       dataDashboard,
-      items: itemsPengguna.map(item => {
-        return { ...item };
-      }),
       fields,
       message: 'Selamat Datang di Halaman Admin',
+      dataUser: [],
+      isLoading: true,
     };
   },
-  methods: {},
-  mounted() {},
+  async mounted() {
+    await this.getAllUser();
+  },
+  methods: {
+    async getAllUser() {
+      const data = await UsersService.getAll();
+      this.dataUser = data.map(item => {
+        return { ...item.Record };
+      });
+      this.isLoading = false;
+    },
+  },
 };
 </script>
