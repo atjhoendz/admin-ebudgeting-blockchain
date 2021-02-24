@@ -8,7 +8,7 @@
         <CInput
           label="Username"
           placeholder="Masukkan username"
-          v-model.trim="$v.username.$model"
+          v-model.trim="$v.formData.username.$model"
           :invalid-feedback="usernameMsg"
           :is-valid="validate('username')"
         >
@@ -20,7 +20,7 @@
         <CInput
           label="Nama Lengkap"
           placeholder="Masukkan nama lengkap"
-          v-model.trim="$v.nama_lengkap.$model"
+          v-model.trim="$v.formData.nama_lengkap.$model"
           invalid-feedback="Nama Lengkap harus diisi."
           :is-valid="validate('nama_lengkap')"
         >
@@ -33,7 +33,7 @@
           label="NIP"
           placeholder="Masukkan NIP"
           type="number"
-          v-model.trim="$v.nip.$model"
+          v-model.trim="$v.formData.nip.$model"
           :invalid-feedback="nipMsg"
           :is-valid="validate('nip')"
         >
@@ -46,7 +46,7 @@
           label="Password"
           placeholder="Masukkan password"
           type="password"
-          v-model.trim="$v.password.$model"
+          v-model.trim="$v.formData.password.$model"
           :is-valid="validate('password')"
           :invalid-feedback="passwordMsg"
         >
@@ -59,7 +59,7 @@
           label="Jabatan"
           placeholder="Pilih jabatan"
           :options="options"
-          :value="jabatan"
+          :value="formData.jabatan"
           @update:value="setJabatan($event)"
           :is-valid="validate('jabatan')"
           invalid-feedback="Jabatan harus dipilih"
@@ -76,20 +76,9 @@
 <script>
 import CardForm from '../../components/CardForm.vue';
 import { UsersService } from '../../services/user.service';
-import {
-  required,
-  minLength,
-  numeric,
-  maxLength,
-} from 'vuelidate/lib/validators';
-
-const options = [
-  { label: 'Admin', value: 'Admin' },
-  { label: 'Bagian Umum', value: 'BagianUmum' },
-  { label: 'Admin Keuangan', value: 'AdminKeuangan' },
-  { label: 'Kepala Keuangan', value: 'KepalaKeuangan' },
-  { label: 'Kepala Biro AUPK', value: 'KepalaBiroAUPK' },
-];
+import { userValidations } from '../../validations/userValidation';
+import { ValidationMessage } from '../../validations/message';
+import { options } from './jabatanOptions';
 
 export default {
   components: { CardForm },
@@ -97,77 +86,51 @@ export default {
   data() {
     return {
       options,
-      username: '',
-      nama_lengkap: '',
-      password: '',
-      nip: '',
-      jabatan: '',
+      formData: {
+        docType: 'user',
+        username: '',
+        nama_lengkap: '',
+        password: '',
+        nip: '',
+        jabatan: '',
+      },
       showLoading: false,
       message: '',
       error: false,
     };
   },
-  validations: {
-    username: {
-      required,
-      minLength: minLength(4),
-    },
-    nama_lengkap: {
-      required,
-    },
-    password: {
-      required,
-      minLength: minLength(6),
-      goodPassword: password => {
-        return /[a-z]/.test(password) && /[0-9]/.test(password);
-      },
-    },
-    nip: {
-      required,
-      numeric,
-      minLength: minLength(18),
-      maxLength: maxLength(18),
-    },
-    jabatan: {
-      required,
-    },
-  },
+  validations: userValidations,
   computed: {
     usernameMsg() {
-      const msgRequired = 'Username harus diisi.';
-      const msgMinLenght = 'Minimal 4 karakter.';
-      if (!this.$v.username.required) {
-        return msgRequired;
-      } else if (!this.$v.username.minLength) {
-        return msgMinLenght;
+      if (!this.$v.formData.username.required) {
+        return ValidationMessage.required('Username');
+      } else if (!this.$v.formData.username.minLength) {
+        return ValidationMessage.minLength(4);
       }
-      return msgRequired + msgMinLenght;
+      return null;
     },
     nipMsg() {
-      const msgRequired = 'NIP harus diisi.';
-      const msgNumeric = 'NIP harus angka.';
-      const msgLength = 'Panjang NIP harus 18 digit.';
-      if (!this.$v.nip.required) {
-        return msgRequired;
-      } else if (!this.$v.nip.numeric) {
-        return msgNumeric;
-      } else if (!this.$v.nip.minLength || !this.$v.nip.maxLength) {
-        return msgLength;
+      if (!this.$v.formData.nip.required) {
+        return ValidationMessage.required('NIP');
+      } else if (!this.$v.formData.nip.numeric) {
+        return ValidationMessage.numeric('NIP');
+      } else if (
+        !this.$v.formData.nip.minLength ||
+        !this.$v.formData.nip.maxLength
+      ) {
+        return ValidationMessage.lengthNumeric('NIP', 18);
       }
-      return msgRequired + msgNumeric + msgLength;
+      return null;
     },
     passwordMsg() {
-      const msgRequired = 'Password harus diisi.';
-      const msgMinLenght = 'Minimal 6 karakter.';
-      const msgChar = 'Harus terdapat huruf dan angka.';
-      if (!this.$v.password.required) {
-        return msgRequired;
-      } else if (!this.$v.password.minLength) {
-        return msgMinLenght;
-      } else if (!this.$v.password.goodPassword) {
-        return msgChar;
+      if (!this.$v.formData.password.required) {
+        return ValidationMessage.required('Password');
+      } else if (!this.$v.formData.password.minLength) {
+        return ValidationMessage.minLength(6);
+      } else if (!this.$v.formData.password.goodPassword) {
+        return ValidationMessage.password('huruf', 'angka');
       }
-      return msgRequired + msgMinLenght + msgChar;
+      return null;
     },
     isError() {
       return this.error ? 'text-danger' : 'text-info';
@@ -175,34 +138,26 @@ export default {
   },
   methods: {
     validate(type) {
-      if (this.$v[type].$error) {
-        return !this.$v[type].$invalid;
+      if (this.$v.formData[type].$error) {
+        return !this.$v.formData[type].$invalid;
       }
       return null;
     },
     setJabatan(value) {
-      this.jabatan = value;
-      this.$v.jabatan.$touch();
+      this.formData.jabatan = value;
+      this.$v.formData.jabatan.$touch();
     },
     async addData() {
-      this.$v.$touch();
+      this.$v.formData.$touch();
 
-      if (this.$v.$invalid) {
+      if (this.$v.formData.$invalid) {
         return;
       }
 
       this.showLoading = true;
-      const formData = {
-        docType: 'user',
-        username: this.username,
-        nama_lengkap: this.nama_lengkap,
-        password: this.password,
-        nip: this.nip,
-        jabatan: this.jabatan,
-      };
 
       try {
-        const result = await UsersService.addData(formData);
+        const result = await UsersService.addData(this.formData);
         if (result.statusCode == 201) {
           this.message = result.message;
         }
