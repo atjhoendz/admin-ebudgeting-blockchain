@@ -22,7 +22,9 @@
                   <CInput
                     placeholder="Username"
                     autocomplete="username"
-                    v-model="username"
+                    v-model.trim="$v.username.$model"
+                    :is-valid="validate('username')"
+                    invalid-feedback="Username harus diisi."
                   >
                     <template #prepend-content
                       ><CIcon name="cil-user"
@@ -32,7 +34,9 @@
                     placeholder="Password"
                     type="password"
                     autocomplete="curent-password"
-                    v-model="password"
+                    v-model.trim="$v.password.$model"
+                    :is-valid="validate('password')"
+                    invalid-feedback="Password harus diisi."
                     @keyup.enter="makeLogin"
                   >
                     <template #prepend-content
@@ -63,6 +67,7 @@
 
 <script>
 import { AuthService } from '@/services/auth.service';
+import { required } from 'vuelidate/lib/validators';
 
 export default {
   name: 'Login',
@@ -74,9 +79,27 @@ export default {
       message: '',
     };
   },
-
+  validations: {
+    username: {
+      required,
+    },
+    password: {
+      required,
+    },
+  },
   methods: {
+    validate(type) {
+      if (this.$v[type].$error) {
+        return !this.$v[type].$invalid;
+      }
+
+      return null;
+    },
     async makeLogin() {
+      this.$v.$touch();
+
+      if (this.$v.$invalid) return;
+
       this.showLoading = !this.showLoading;
       try {
         await AuthService.makeLogin({
