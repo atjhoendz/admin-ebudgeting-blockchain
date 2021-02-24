@@ -1,11 +1,12 @@
+/* eslint-disable no-useless-catch */
 import axios from 'axios';
 import { API_URL } from '../.env';
 import $store from '../store';
 import $router from '../router';
+import { Http } from '../services/http.init';
 
 export class AuthService {
   static async makeLogin({ username, password }) {
-    // eslint-disable-next-line no-useless-catch
     try {
       const response = await axios.post(
         `${API_URL}/auth/login`,
@@ -19,6 +20,21 @@ export class AuthService {
         exp: parseTokenData(response.data.data.accessToken).exp,
       });
 
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async makeLogout() {
+    try {
+      const response = await new Http({ auth: true }).post(
+        'auth/logout',
+        {},
+        { withCredentials: true },
+      );
+      _resetAuthData();
+      $router.push({ name: 'Login' }).catch(() => {});
       return response.data;
     } catch (err) {
       throw err;
@@ -110,6 +126,9 @@ function _resetAuthData() {
 }
 
 function _setAuthData({ accessToken, refreshToken = null, exp } = {}) {
+  const payloadData = parseTokenData(accessToken);
+  $store.commit('user/SET_CURRENT_USER', payloadData);
+
   $store.commit('auth/SET_ACCESS_TOKEN', accessToken);
   if (refreshToken) $store.commit('auth/SET_REFRESH_TOKEN', refreshToken);
   $store.commit('auth/SET_ATOKEN_EXP_DATE', exp);
