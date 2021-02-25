@@ -34,7 +34,9 @@
           <td>
             <CButtonGroup>
               <CButton color="success" :to="editByID(item.key)">Edit</CButton>
-              <CButton color="danger" :to="deleteByID(item.key)">Hapus</CButton>
+              <CButton color="danger" @click="deleteByID(item.key)"
+                >Hapus</CButton
+              >
             </CButtonGroup>
           </td>
         </template>
@@ -91,7 +93,7 @@ export default {
       return `${this.routeEndpoint}/edit?id=${id}`;
     },
     deleteByID(id) {
-      return `${this.routeEndpoint}/hapus?id=${id}`;
+      this.$emit('clicked', id);
     },
   },
 };

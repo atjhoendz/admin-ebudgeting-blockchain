@@ -7,8 +7,28 @@
         :isLoading="isLoading"
         title="Data Pengguna"
         routeEndpoint="data-pengguna"
+        @clicked="confirmDelete"
       ></card-list-data>
     </CCol>
+    <CModal title="Hapus" color="warning" :show.sync="showModalDelete" centered>
+      Apakah anda yakin untuk menghapus data ini?
+      <template #footer>
+        <CButton @click="showModalDelete = false" color="secondary"
+          >Batal</CButton
+        >
+        <CSpinner color="info" v-if="isDeleting" />
+        <CButton @click="deleteData()" color="danger" v-if="!isDeleting"
+          >Hapus</CButton
+        >
+      </template>
+    </CModal>
+    <CToaster :autohide="5000">
+      <template v-if="showMessage">
+        <CToast :show="true" header="Information" color="success">
+          {{ infoMessage }}
+        </CToast>
+      </template>
+    </CToaster>
   </CRow>
 </template>
 
@@ -34,7 +54,12 @@ export default {
     return {
       items: [],
       fields,
-      isLoading: true,
+      isLoading: false,
+      showModalDelete: false,
+      keyForDelete: '',
+      isDeleting: false,
+      showMessage: false,
+      infoMessage: '',
     };
   },
   async mounted() {
@@ -42,6 +67,7 @@ export default {
   },
   methods: {
     async getAll() {
+      this.isLoading = true;
       const data = await UsersService.getAll();
       this.items = data.map(item => {
         const newItem = {
@@ -51,6 +77,22 @@ export default {
         return newItem;
       });
       this.isLoading = false;
+    },
+    async confirmDelete(value) {
+      this.showModalDelete = true;
+      this.keyForDelete = value;
+    },
+    async deleteData() {
+      this.isDeleting = true;
+      const result = await UsersService.delete(this.keyForDelete);
+
+      this.infoMessage = result.message;
+      this.showMessage = true;
+
+      this.showModalDelete = false;
+      this.isDeleting = false;
+
+      await this.getAll();
     },
   },
 };

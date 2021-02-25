@@ -65,4 +65,16 @@ export class UsersService extends BaseService {
       throw err.response.data;
     }
   }
+
+  static async delete(id) {
+    try {
+      const response = await this.request({ auth: true }).delete(
+        `${this.entity}/${id}`,
+      );
+
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
 }
