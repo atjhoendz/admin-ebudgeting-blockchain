@@ -3,6 +3,7 @@ import {
   minLength,
   numeric,
   maxLength,
+  sameAs,
 } from 'vuelidate/lib/validators';
 
 export const userValidations = {
@@ -29,6 +30,25 @@ export const userValidations = {
     },
     jabatan: {
       required,
+    },
+  },
+  passwordBaru: {
+    password: {
+      required,
+      minLength: minLength(6),
+      goodPassword: password => {
+        return /[a-z]/.test(password) && /[0-9]/.test(password);
+      },
+    },
+    konfirmasi: {
+      sameAs: sameAs('password'),
+    },
+  },
+  passwordLama: {
+    required,
+    minLength: minLength(6),
+    goodPassword: password => {
+      return /[a-z]/.test(password) && /[0-9]/.test(password);
     },
   },
 };

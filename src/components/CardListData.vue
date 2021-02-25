@@ -30,11 +30,11 @@
         sorter
         pagination
       >
-        <template #proses="{index}" v-if="showProses">
+        <template #proses="{item}" v-if="showProses">
           <td>
             <CButtonGroup>
-              <CButton color="success" :to="editByID(index)">Edit</CButton>
-              <CButton color="danger" :to="deleteByID(index)">Hapus</CButton>
+              <CButton color="success" :to="editByID(item.key)">Edit</CButton>
+              <CButton color="danger" :to="deleteByID(item.key)">Hapus</CButton>
             </CButtonGroup>
           </td>
         </template>

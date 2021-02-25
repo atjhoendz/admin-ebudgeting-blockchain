@@ -44,7 +44,11 @@ export default {
     async getAll() {
       const data = await UsersService.getAll();
       this.items = data.map(item => {
-        return { ...item.Record };
+        const newItem = {
+          key: item.Key,
+          ...item.Record,
+        };
+        return newItem;
       });
       this.isLoading = false;
     },

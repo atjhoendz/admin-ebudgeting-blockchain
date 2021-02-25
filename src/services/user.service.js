@@ -28,4 +28,41 @@ export class UsersService extends BaseService {
       throw err;
     }
   }
+
+  static async get(id) {
+    try {
+      const response = await this.request({ auth: true }).get(
+        `${this.entity}/${id}`,
+      );
+
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async update(id, formData) {
+    try {
+      const response = await this.request({ auth: true }).put(
+        `${this.entity}/${id}`,
+        formData,
+      );
+
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  static async updatePassword(id, formData) {
+    try {
+      const response = await this.request({ auth: true }).put(
+        `${this.entity}/password/${id}`,
+        formData,
+      );
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
 }
