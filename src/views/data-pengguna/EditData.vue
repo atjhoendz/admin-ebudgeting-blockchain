@@ -132,7 +132,7 @@
 <script>
 import { UsersService } from '../../services/user.service';
 import { options } from './jabatanOptions';
-import { userValidations } from '../../validations/userValidation';
+import { userValidations } from '../../validations/validationRules';
 import { ValidationMessage } from '../../validations/message';
 import ToastMsg from '../../components/ToastMsg.vue';
 

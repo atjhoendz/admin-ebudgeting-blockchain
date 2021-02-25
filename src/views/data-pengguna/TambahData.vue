@@ -82,7 +82,7 @@
 <script>
 import CardForm from '../../components/CardForm.vue';
 import { UsersService } from '../../services/user.service';
-import { userValidations } from '../../validations/userValidation';
+import { userValidations } from '../../validations/validationRules';
 import { ValidationMessage } from '../../validations/message';
 import { options } from './jabatanOptions';
 import ToastMsg from '../../components/ToastMsg.vue';
