@@ -84,6 +84,7 @@ export const routes = [
     name: 'Data Provinsi',
     redirect: '/data-provinsi',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',

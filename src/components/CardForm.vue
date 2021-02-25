@@ -6,7 +6,7 @@
           {{ title }}
         </CCardHeader>
         <CCardBody>
-          <CForm>
+          <CForm v-on:submit.prevent>
             <slot></slot>
           </CForm>
         </CCardBody>

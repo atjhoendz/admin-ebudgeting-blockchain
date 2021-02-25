@@ -52,3 +52,11 @@ export const userValidations = {
     },
   },
 };
+
+export const provinsiValidations = {
+  formData: {
+    nama: {
+      required,
+    },
+  },
+};
