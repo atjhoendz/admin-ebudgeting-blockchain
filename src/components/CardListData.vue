@@ -34,7 +34,10 @@
           <td>
             <CButtonGroup>
               <CButton color="success" :to="editByID(item.key)">Edit</CButton>
-              <CButton color="danger" @click="deleteByID(item.key)"
+              <CButton
+                color="danger"
+                @click="deleteByID(item.key)"
+                :disabled="checkCurrentUser(item.key)"
                 >Hapus</CButton
               >
             </CButtonGroup>
@@ -94,6 +97,9 @@ export default {
     },
     deleteByID(id) {
       this.$emit('clicked', id);
+    },
+    checkCurrentUser(key) {
+      return key == this.$store.state.user.currentUser.sub;
     },
   },
 };
