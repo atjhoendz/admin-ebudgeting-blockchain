@@ -7,9 +7,6 @@
             Edit Data Pengguna
           </CCardHeader>
           <CCardBody>
-            <p :class="isError + ' text-center'" v-if="messageUser">
-              {{ messageUser }}
-            </p>
             <CRow>
               <CCol sm="12">
                 <CInput
@@ -74,9 +71,6 @@
             Edit Password
           </CCardHeader>
           <CCardBody>
-            <p :class="isError + ' text-center'" v-if="messagePwd">
-              {{ messagePwd }}
-            </p>
             <CRow>
               <CCol sm="12">
                 <CInput
@@ -126,6 +120,12 @@
         </CCard>
       </CForm>
     </CCol>
+    <toast-msg
+      :showTime="10000"
+      :showToast="showToast"
+      :message="message"
+      :color="isError"
+    />
   </CRow>
 </template>
 
@@ -134,9 +134,13 @@ import { UsersService } from '../../services/user.service';
 import { options } from './jabatanOptions';
 import { userValidations } from '../../validations/userValidation';
 import { ValidationMessage } from '../../validations/message';
+import ToastMsg from '../../components/ToastMsg.vue';
 
 export default {
   name: 'EditDataPengguna',
+  components: {
+    ToastMsg,
+  },
   data() {
     return {
       options,
@@ -155,9 +159,9 @@ export default {
       },
       showLoadingUser: false,
       showLoadingPassword: false,
-      messageUser: '',
-      messagePwd: '',
+      message: '',
       error: false,
+      showToast: false,
     };
   },
   validations: userValidations,
@@ -204,7 +208,7 @@ export default {
       return null;
     },
     isError() {
-      return this.error ? 'text-danger' : 'text-info';
+      return this.error ? 'danger' : 'success';
     },
   },
   methods: {
@@ -248,11 +252,13 @@ export default {
 
         this.showLoadingUser = false;
         this.error = false;
-        this.messageUser = response.message;
+        this.message = response.message;
+        this.showToast = true;
       } catch (err) {
         this.showLoadingUser = false;
         this.error = true;
-        this.messageUser = 'Data tidak berhasil diperbarui.';
+        this.message = 'Data tidak berhasil diperbarui.';
+        this.showToast = true;
       }
 
       setTimeout(() => {
@@ -260,6 +266,12 @@ export default {
       }, 60000);
     },
     async updatePassword() {
+      this.$v.passwordBaru.$touch();
+      this.$v.passwordLama.$touch();
+
+      if (this.$v.passwordBaru.$invalid || this.$v.passwordLama.$invalid)
+        return;
+
       this.showLoadingPassword = true;
       try {
         const id = this.$route.query.id;
@@ -270,11 +282,13 @@ export default {
 
         this.showLoadingPassword = false;
         this.error = false;
-        this.messagePwd = response.message;
+        this.message = response.message;
+        this.showToast = true;
       } catch (err) {
         this.showLoadingPassword = false;
         this.error = true;
-        this.messagePwd = err.message;
+        this.message = err.message;
+        this.showToast = true;
       }
 
       setTimeout(() => {

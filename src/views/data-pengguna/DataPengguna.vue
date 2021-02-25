@@ -22,13 +22,11 @@
         >
       </template>
     </CModal>
-    <CToaster :autohide="5000">
-      <template v-if="showMessage">
-        <CToast :show="true" header="Information" color="success">
-          {{ infoMessage }}
-        </CToast>
-      </template>
-    </CToaster>
+    <toast-msg
+      :showToast="showMessage"
+      color="success"
+      :message="infoMessage"
+    />
   </CRow>
 </template>
 
@@ -44,11 +42,13 @@ const fields = [
 
 import CardListData from '../../components/CardListData';
 import { UsersService } from '../../services/user.service';
+import ToastMsg from '../../components/ToastMsg';
 
 export default {
   name: 'DataPengguna',
   components: {
     CardListData,
+    ToastMsg,
   },
   data() {
     return {
