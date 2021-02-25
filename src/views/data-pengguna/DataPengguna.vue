@@ -6,9 +6,20 @@
         :fields="fields"
         :isLoading="isLoading"
         title="Data Pengguna"
-        routeEndpoint="data-pengguna"
-        @clicked="confirmDelete"
-      ></card-list-data>
+        :routeEndpoint="routeEndpoint"
+      >
+        <template #proses="{item}">
+          <CButtonGroup>
+            <CButton color="success" :to="editByID(item.key)">Edit</CButton>
+            <CButton
+              color="danger"
+              @click="confirmDelete(item.key)"
+              :disabled="checkCurrentUser(item.key)"
+              >Hapus</CButton
+            >
+          </CButtonGroup>
+        </template>
+      </card-list-data>
     </CCol>
     <CModal title="Hapus" color="warning" :show.sync="showModalDelete" centered>
       Apakah anda yakin untuk menghapus data ini?
@@ -37,7 +48,7 @@ const fields = [
   { key: 'nama_lengkap', label: 'Nama Lengkap' },
   { key: 'nip', label: 'NIP' },
   { key: 'jabatan', _style: 'min-width:100px' },
-  { key: 'proses', _style: 'width:50px' },
+  { key: 'proses', _style: 'width:50px; text-align:center' },
 ];
 
 import CardListData from '../../components/CardListData';
@@ -60,6 +71,7 @@ export default {
       isDeleting: false,
       showMessage: false,
       infoMessage: '',
+      routeEndpoint: 'data-pengguna',
     };
   },
   async mounted() {
@@ -93,6 +105,12 @@ export default {
       this.isDeleting = false;
 
       await this.getAll();
+    },
+    editByID(id) {
+      return `${this.routeEndpoint}/edit?id=${id}`;
+    },
+    checkCurrentUser(key) {
+      return key == this.$store.state.user.currentUser.sub;
     },
   },
 };

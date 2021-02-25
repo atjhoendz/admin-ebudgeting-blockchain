@@ -32,15 +32,7 @@
       >
         <template #proses="{item}" v-if="showProses">
           <td>
-            <CButtonGroup>
-              <CButton color="success" :to="editByID(item.key)">Edit</CButton>
-              <CButton
-                color="danger"
-                @click="deleteByID(item.key)"
-                :disabled="checkCurrentUser(item.key)"
-                >Hapus</CButton
-              >
-            </CButtonGroup>
+            <slot name="proses" :item="item"></slot>
           </td>
         </template>
         <template #no="{index}">
@@ -89,17 +81,6 @@ export default {
   computed: {
     urlTambahData: function() {
       return this.routeEndpoint + '/tambah';
-    },
-  },
-  methods: {
-    editByID(id) {
-      return `${this.routeEndpoint}/edit?id=${id}`;
-    },
-    deleteByID(id) {
-      this.$emit('clicked', id);
-    },
-    checkCurrentUser(key) {
-      return key == this.$store.state.user.currentUser.sub;
     },
   },
 };
