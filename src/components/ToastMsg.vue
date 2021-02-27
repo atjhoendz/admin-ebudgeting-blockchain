@@ -1,8 +1,8 @@
 <template>
   <CToaster :autohide="showTime">
-    <template v-if="showToast">
-      <CToast :show="true" :header="title" :color="color">
-        {{ message }}
+    <template v-for="(toast, i) in listToasts">
+      <CToast :key="i" :show="true" header="Information" :color="toast.color">
+        {{ toast.message }}
       </CToast>
     </template>
   </CToaster>
@@ -16,21 +16,8 @@ export default {
       type: Number,
       default: 5000,
     },
-    showToast: {
-      type: Boolean,
-      default: false,
-    },
-    title: {
-      type: String,
-      default: 'Information',
-    },
-    color: {
-      type: String,
-      default: 'info',
-    },
-    message: {
-      type: String,
-      default: '',
+    listToasts: {
+      type: Array,
     },
   },
 };
