@@ -29,6 +29,7 @@
                   v-model.trim="$v.formData.nama_lengkap.$model"
                   :is-valid="validate('nama_lengkap')"
                   invalid-feedback="Nama Lengkap harus diisi."
+                  :readonly="readOnly"
                 >
                 </CInput>
               </CCol>
@@ -42,6 +43,7 @@
                   v-model.trim="$v.formData.nip.$model"
                   :is-valid="validate('nip')"
                   :invalid-feedback="nipMsg"
+                  :readonly="readOnly"
                 >
                 </CInput>
               </CCol>
@@ -55,6 +57,7 @@
                   @update:value="setJabatan($event)"
                   :is-valid="validate('jabatan')"
                   invalid-feedback="Jabatan harus diisi."
+                  :disabled="readOnly"
                 ></CSelect>
               </CCol>
             </CRow>
@@ -157,6 +160,7 @@ export default {
       showLoadingUser: false,
       showLoadingPassword: false,
       listToasts: [],
+      readOnly: true,
     };
   },
   validations: userValidations,
@@ -227,11 +231,19 @@ export default {
     },
     async getData(id) {
       try {
+        this.showLoadingUser = true;
         const response = await UsersService.get(id);
 
         this.formData = response.data;
+        this.showLoadingUser = false;
+        this.readOnly = false;
       } catch (err) {
-        console.log(err);
+        const toast = {
+          message: 'Terjadi masalah. Data tidak berhasil didapatkan.',
+          color: 'danger',
+        };
+
+        this.listToasts.push(toast);
       }
     },
     async update() {
