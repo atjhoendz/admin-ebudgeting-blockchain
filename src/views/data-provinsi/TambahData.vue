@@ -19,12 +19,7 @@
         Simpan
       </CButton>
     </card-form>
-    <toast-msg
-      :showTime="10000"
-      :showToast="showToast"
-      :color="isError"
-      :message="message"
-    />
+    <toast-msg :listToasts="listToasts" />
   </div>
 </template>
 
@@ -44,15 +39,8 @@ export default {
         nama: '',
       },
       isAdding: false,
-      error: false,
-      showToast: false,
-      message: '',
+      listToasts: [],
     };
-  },
-  computed: {
-    isError: function() {
-      return this.error ? 'danger' : 'success';
-    },
   },
   validations: provinsiValidations,
   methods: {
@@ -71,12 +59,22 @@ export default {
         this.isAdding = true;
         const result = await ProvinsiService.addData(this.formData);
 
-        this.message = result.message;
-        this.showToast = true;
         this.isAdding = false;
+        const toast = {
+          message: result.message,
+          color: 'success',
+        };
+
+        this.$store.commit('toast/ADD_TOAST', toast);
+        return this.$router.push({ path: '/data-provinsi' });
       } catch (err) {
         this.isAdding = false;
-        console.log(err);
+
+        const toast = {
+          message: 'Terjadi Masalah. Data tidak berhasil ditambahkan.',
+          color: 'danger',
+        };
+        this.listToasts.push(toast);
       }
     },
   },

@@ -12,18 +12,32 @@
         <template #proses="{item}">
           <CButtonGroup>
             <CButton color="success" :to="editByID(item.key)">Edit</CButton>
-            <CButton color="danger" @click="deleteByID(item.key)"
+            <CButton color="danger" @click="confirmDelete(item.key)"
               >Hapus</CButton
             >
           </CButtonGroup>
         </template>
       </card-list-data>
     </CCol>
+    <CModal title="Hapus" color="warning" :show.sync="showModalDelete" centered>
+      Apakah anda yakin untuk menghapus data ini?
+      <template #footer>
+        <CButton @click="showModalDelete = false" color="secondary"
+          >Batal</CButton
+        >
+        <CSpinner color="info" v-if="isDeleting" />
+        <CButton @click="deleteData()" color="danger" v-if="!isDeleting"
+          >Hapus</CButton
+        >
+      </template>
+    </CModal>
+    <toast-msg :listToasts="listToasts" />
   </CRow>
 </template>
 
 <script>
 import CardListData from '../../components/CardListData.vue';
+import ToastMsg from '../../components/ToastMsg';
 import { ProvinsiService } from '../../services/provinsi.service';
 
 const fields = [
@@ -33,7 +47,7 @@ const fields = [
 ];
 
 export default {
-  components: { CardListData },
+  components: { CardListData, ToastMsg },
   name: 'DataProvinsi',
   data() {
     return {
@@ -41,14 +55,38 @@ export default {
       fields,
       routeEndpoint: 'data-provinsi',
       isLoading: false,
+      isDeleting: false,
+      showModalDelete: false,
+      keyForDelete: '',
+      listToasts: [],
     };
   },
   methods: {
     editByID(id) {
       return `${this.routeEndpoint}/edit?id=${id}`;
     },
-    deleteByID(id) {
-      console.log(id);
+    async deleteData() {
+      this.isDeleting = true;
+
+      try {
+        const result = await ProvinsiService.delete(this.keyForDelete);
+
+        const toast = {
+          message: result.message,
+          color: 'success',
+        };
+        this.listToasts.push(toast);
+
+        await this.getAll();
+      } catch (err) {
+        const toast = {
+          message: 'Terjadi masalah. Data tidak berhasil dihapus',
+          color: 'danger',
+        };
+        this.listToasts.push(toast);
+      }
+      this.isDeleting = false;
+      this.showModalDelete = false;
     },
     async getAll() {
       try {
@@ -61,15 +99,26 @@ export default {
           };
           return newItem;
         });
-        this.isLoading = false;
       } catch (err) {
-        this.isLoading = false;
-        console.log(err);
+        const toast = {
+          message: 'Terjadi masalah. Tidak berhasil mendapatkan data.',
+          color: 'danger',
+        };
+        this.listToasts.push(toast);
       }
+      this.isLoading = false;
+    },
+    confirmDelete(key) {
+      this.showModalDelete = true;
+      this.keyForDelete = key;
     },
   },
   async mounted() {
     await this.getAll();
+    if (this.$store.state.toast.listToasts.length) {
+      this.listToasts = this.$store.state.toast.listToasts;
+      this.$store.commit('toast/RESET');
+    }
   },
 };
 </script>
