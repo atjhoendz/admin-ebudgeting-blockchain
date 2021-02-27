@@ -70,12 +70,7 @@
         Simpan
       </CButton>
     </card-form>
-    <toast-msg
-      :showTime="10000"
-      :showToast="showToast"
-      :color="isError"
-      :message="message"
-    />
+    <toast-msg :listToasts="listToasts" />
   </div>
 </template>
 
@@ -102,9 +97,7 @@ export default {
         jabatan: '',
       },
       showLoading: false,
-      message: '',
-      error: false,
-      showToast: false,
+      listToasts: [],
     };
   },
   validations: userValidations,
@@ -140,9 +133,6 @@ export default {
       }
       return null;
     },
-    isError() {
-      return this.error ? 'danger' : 'success';
-    },
   },
   methods: {
     validate(type) {
@@ -166,18 +156,23 @@ export default {
 
       try {
         const result = await UsersService.addData(this.formData);
-        if (result.statusCode == 201) {
-          this.message = result.message;
-        }
-        this.showLoading = false;
-        this.error = false;
-        this.showToast = true;
+
+        const toast = {
+          message: result.message,
+          color: 'success',
+        };
+
+        this.$store.commit('toast/ADD_TOAST', toast);
+        return this.$router.push({ path: '/data-pengguna' });
       } catch (err) {
-        this.message = err.response.data.message;
-        this.showLoading = false;
-        this.error = true;
-        this.showToast = true;
+        const toast = {
+          message: err.response.data.message,
+          color: 'danger',
+        };
+
+        this.listToasts.push(toast);
       }
+      this.showLoading = false;
     },
   },
 };

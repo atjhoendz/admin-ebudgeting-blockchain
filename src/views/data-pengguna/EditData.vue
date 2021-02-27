@@ -15,6 +15,8 @@
                   v-model.trim="$v.formData.username.$model"
                   :is-valid="validate('username')"
                   :invalid-feedback="usernameMsg"
+                  readonly
+                  description="Username tidak dapat diubah."
                 >
                 </CInput>
               </CCol>
@@ -120,12 +122,7 @@
         </CCard>
       </CForm>
     </CCol>
-    <toast-msg
-      :showTime="10000"
-      :showToast="showToast"
-      :message="message"
-      :color="isError"
-    />
+    <toast-msg :listToasts="listToasts" />
   </CRow>
 </template>
 
@@ -159,9 +156,7 @@ export default {
       },
       showLoadingUser: false,
       showLoadingPassword: false,
-      message: '',
-      error: false,
-      showToast: false,
+      listToasts: [],
     };
   },
   validations: userValidations,
@@ -250,20 +245,22 @@ export default {
         const id = this.$route.query.id;
         const response = await UsersService.update(id, this.formData);
 
-        this.showLoadingUser = false;
-        this.error = false;
-        this.message = response.message;
-        this.showToast = true;
-      } catch (err) {
-        this.showLoadingUser = false;
-        this.error = true;
-        this.message = 'Data tidak berhasil diperbarui.';
-        this.showToast = true;
-      }
+        const toast = {
+          message: response.message,
+          color: 'success',
+        };
+        this.$store.commit('toast/ADD_TOAST', toast);
 
-      setTimeout(() => {
-        this.messageUser = '';
-      }, 60000);
+        return this.$router.push({ path: '/data-pengguna' });
+      } catch (err) {
+        const toast = {
+          message: 'Data tidak berhasil diperbarui.',
+          color: 'danger',
+        };
+
+        this.listToasts.push(toast);
+      }
+      this.showLoadingUser = false;
     },
     async updatePassword() {
       this.$v.passwordBaru.$touch();
@@ -280,20 +277,22 @@ export default {
         const dataPwd = { password_lama, ...this.formData };
         const response = await UsersService.updatePassword(id, dataPwd);
 
-        this.showLoadingPassword = false;
-        this.error = false;
-        this.message = response.message;
-        this.showToast = true;
-      } catch (err) {
-        this.showLoadingPassword = false;
-        this.error = true;
-        this.message = err.message;
-        this.showToast = true;
-      }
+        const toast = {
+          message: response.message,
+          color: 'success',
+        };
 
-      setTimeout(() => {
-        this.messagePwd = '';
-      }, 60000);
+        this.$store.commit('toast/ADD_TOAST', toast);
+        return this.$router.push({ path: '/data-pengguna' });
+      } catch (err) {
+        const toast = {
+          message: err.message,
+          color: 'danger',
+        };
+
+        this.listToasts.push(toast);
+      }
+      this.showLoadingPassword = false;
     },
   },
   async mounted() {

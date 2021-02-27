@@ -33,11 +33,7 @@
         >
       </template>
     </CModal>
-    <toast-msg
-      :showToast="showMessage"
-      color="success"
-      :message="infoMessage"
-    />
+    <toast-msg :listToasts="listToasts" />
   </CRow>
 </template>
 
@@ -69,13 +65,16 @@ export default {
       showModalDelete: false,
       keyForDelete: '',
       isDeleting: false,
-      showMessage: false,
-      infoMessage: '',
       routeEndpoint: 'data-pengguna',
+      listToasts: [],
     };
   },
   async mounted() {
     await this.getAll();
+    if (this.$store.state.toast.listToasts.length) {
+      this.listToasts = this.$store.state.toast.listToasts;
+      this.$store.commit('toast/RESET');
+    }
   },
   methods: {
     async getAll() {
@@ -90,21 +89,33 @@ export default {
       });
       this.isLoading = false;
     },
-    async confirmDelete(value) {
+    confirmDelete(value) {
       this.showModalDelete = true;
       this.keyForDelete = value;
     },
     async deleteData() {
-      this.isDeleting = true;
-      const result = await UsersService.delete(this.keyForDelete);
+      try {
+        this.isDeleting = true;
+        const result = await UsersService.delete(this.keyForDelete);
 
-      this.infoMessage = result.message;
-      this.showMessage = true;
+        const toast = {
+          message: result.message,
+          color: 'success',
+        };
 
+        this.listToasts.push(toast);
+
+        await this.getAll();
+      } catch (err) {
+        const toast = {
+          message: 'Terjadi Masalah. Data tidak berhasil dihapus.',
+          color: 'danger',
+        };
+
+        this.listToasts.push(toast);
+      }
       this.showModalDelete = false;
       this.isDeleting = false;
-
-      await this.getAll();
     },
     editByID(id) {
       return `${this.routeEndpoint}/edit?id=${id}`;
