@@ -60,3 +60,15 @@ export const provinsiValidations = {
     },
   },
 };
+
+export const lembagaValidations = {
+  formData: {
+    nama: {
+      required,
+    },
+    jumlah_anggaran: {
+      required,
+      numeric,
+    },
+  },
+};

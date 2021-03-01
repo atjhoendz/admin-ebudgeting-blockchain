@@ -107,6 +107,7 @@ export const routes = [
     name: 'Data Kategori',
     redirect: '/data-kategori',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',
@@ -129,6 +130,7 @@ export const routes = [
     name: 'Data Lembaga',
     redirect: '/data-lembaga',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',
