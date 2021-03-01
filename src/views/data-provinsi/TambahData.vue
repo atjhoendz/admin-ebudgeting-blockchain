@@ -55,11 +55,11 @@ export default {
 
       if (this.$v.formData.$invalid) return;
 
+      this.isAdding = true;
+
       try {
-        this.isAdding = true;
         const result = await ProvinsiService.addData(this.formData);
 
-        this.isAdding = false;
         const toast = {
           message: result.message,
           color: 'success',
@@ -68,14 +68,13 @@ export default {
         this.$store.commit('toast/ADD_TOAST', toast);
         return this.$router.push({ path: '/data-provinsi' });
       } catch (err) {
-        this.isAdding = false;
-
         const toast = {
           message: 'Terjadi Masalah. Data tidak berhasil ditambahkan.',
           color: 'danger',
         };
         this.listToasts.push(toast);
       }
+      this.isAdding = false;
     },
   },
 };
