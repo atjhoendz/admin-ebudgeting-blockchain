@@ -64,7 +64,11 @@ export default {
         this.formData.nama = result.data.nama;
         this.readOnly = false;
       } catch (err) {
-        console.log(err);
+        const toast = {
+          message: 'Terjadi masalah. Data tidak berhasil didapatkan.',
+          color: 'danger',
+        };
+        this.listToasts.push(toast);
       }
       this.isLoading = false;
     },
