@@ -72,3 +72,15 @@ export const lembagaValidations = {
     },
   },
 };
+
+export const anggaranValidations = {
+  formData: {
+    nama_lembaga: {
+      required,
+    },
+    sisa_anggaran: {
+      required,
+      numeric,
+    },
+  },
+};
