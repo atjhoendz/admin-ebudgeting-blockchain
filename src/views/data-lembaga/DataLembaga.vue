@@ -73,6 +73,12 @@ export default {
         const data = await LembagaService.getAll();
 
         this.items = data.map(item => {
+          item.Record.jumlah_anggaran = parseInt(
+            item.Record.jumlah_anggaran,
+          ).toLocaleString('id', {
+            style: 'currency',
+            currency: 'IDR',
+          });
           return {
             key: item.Key,
             ...item.Record,
