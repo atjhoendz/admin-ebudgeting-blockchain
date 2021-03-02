@@ -153,6 +153,7 @@ export const routes = [
     name: 'Data Anggaran',
     redirect: '/data-anggaran',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',
@@ -175,6 +176,7 @@ export const routes = [
     name: 'Data Penomoran',
     redirect: '/data-penomoran',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',

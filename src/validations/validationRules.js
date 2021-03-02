@@ -84,3 +84,15 @@ export const anggaranValidations = {
     },
   },
 };
+
+export const penomoranValidations = {
+  formData: {
+    nomor: {
+      required,
+      numeric,
+    },
+    tanggal: {
+      required,
+    },
+  },
+};
