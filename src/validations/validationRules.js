@@ -89,7 +89,6 @@ export const penomoranValidations = {
   formData: {
     nomor: {
       required,
-      numeric,
     },
     tanggal: {
       required,

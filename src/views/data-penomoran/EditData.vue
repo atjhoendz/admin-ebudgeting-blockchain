@@ -6,10 +6,9 @@
           <CInput
             label="Nomor PMK"
             placeholder="Masukkan nomor pmk"
-            type="number"
             v-model.trim="$v.formData.nomor.$model"
             :is-valid="validate('nomor')"
-            :invalid-feedback="nomorMsg"
+            invalid-feedback="Nomor PMK harus diisi."
             :readonly="readOnly"
           >
           </CInput>
@@ -39,7 +38,6 @@
 import CardForm from '../../components/CardForm';
 import ToastMsg from '../../components/ToastMsg';
 import { PenomoranService } from '../../services/penomoran.service';
-import { ValidationMessage } from '../../validations/message';
 import { penomoranValidations } from '../../validations/validationRules';
 
 export default {
@@ -58,16 +56,6 @@ export default {
     };
   },
   validations: penomoranValidations,
-  computed: {
-    nomorMsg: function() {
-      if (!this.$v.formData.nomor.required) {
-        return ValidationMessage.required('Nomor PMK');
-      } else if (!this.$v.formData.nomor.numeric) {
-        return ValidationMessage.numeric('Nomor PMK');
-      }
-      return null;
-    },
-  },
   methods: {
     validate(type) {
       if (this.$v.formData[type].$error) {
