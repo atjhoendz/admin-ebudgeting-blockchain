@@ -33,6 +33,7 @@ import { AnggaranService } from '../services/anggaran.service';
 import { KategoriService } from '../services/kategori.service';
 import { LembagaService } from '../services/lembaga.service';
 import { PenomoranService } from '../services/penomoran.service';
+import { PMKService } from '../services/pmk.service';
 import ToastMsg from '../components/ToastMsg.vue';
 
 const fields = [
@@ -66,7 +67,7 @@ export default {
         },
         {
           title: 'Data PMK',
-          text: '0',
+          text: '',
         },
         {
           title: 'Data Penomoran',
@@ -123,6 +124,14 @@ export default {
         throw err;
       }
     },
+    async getCountPMK() {
+      try {
+        const data = await PMKService.getCountData();
+        this.dataDashboard[4].text = data.toString();
+      } catch (err) {
+        throw err;
+      }
+    },
     async getCountPenomoran() {
       try {
         const data = await PenomoranService.getCountData();
@@ -139,6 +148,7 @@ export default {
         await this.getCountKategori();
         await this.getCountLembaga();
         await this.getCountAnggaran();
+        await this.getCountPMK();
         await this.getCountPenomoran();
       } catch (err) {
         const toast = {
