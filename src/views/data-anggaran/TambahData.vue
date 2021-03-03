@@ -6,6 +6,7 @@
           <CSelect
             label="Nama Lembaga"
             placeholder="Pilih nama lembaga"
+            description="Daftar lembaga yang tersedia."
             :options="options"
             invalid-feedback="Nama lembaga harus dipilih."
             :value="formData.nama_lengkap"
@@ -87,14 +88,23 @@ export default {
       this.isLoading = true;
 
       try {
-        const result = await LembagaService.getAll();
+        const dataLembaga = await LembagaService.getAll();
+        const dataAnggaran = await AnggaranService.getAll();
 
-        this.options = result.map(item => {
-          return {
-            label: item.Record.nama,
-            value: item.Record.nama,
-          };
+        const namaLembagaInAnggaran = dataAnggaran.map(item => {
+          return item.Record.nama_lembaga;
         });
+
+        this.options = dataLembaga
+          .filter(item => {
+            return !namaLembagaInAnggaran.includes(item.Record.nama);
+          })
+          .map(item => {
+            return {
+              label: item.Record.nama,
+              value: item.Record.nama,
+            };
+          });
 
         this.readOnly = false;
       } catch (err) {

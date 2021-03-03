@@ -6,6 +6,7 @@
           <CSelect
             label="Nama Lembaga"
             placeholder="Pilih nama lembaga"
+            description="Daftar lembaga yang tersedia"
             :options="options"
             :value="formData.nama_lembaga"
             @update:value="setNamaLembaga($event)"
@@ -85,14 +86,26 @@ export default {
     },
     async getDataLembaga() {
       try {
-        const data = await LembagaService.getAll();
+        const dataLembaga = await LembagaService.getAll();
+        const dataAnggaran = await AnggaranService.getAll();
 
-        this.options = data.map(item => {
-          return {
-            label: item.Record.nama,
-            value: item.Record.nama,
-          };
+        const namaLembagaInAnggaran = dataAnggaran.map(item => {
+          return item.Record.nama_lembaga;
         });
+
+        this.options = dataLembaga
+          .filter(item => {
+            return (
+              !namaLembagaInAnggaran.includes(item.Record.nama) ||
+              item.Record.nama === this.formData.nama_lembaga
+            );
+          })
+          .map(item => {
+            return {
+              label: item.Record.nama,
+              value: item.Record.nama,
+            };
+          });
       } catch (err) {
         const toast = {
           message: 'Terjadi masalah. Mendapatkan data lembaga tidak berhasil',
@@ -105,11 +118,11 @@ export default {
       this.isLoading = true;
 
       try {
-        await this.getDataLembaga();
-
         const result = await AnggaranService.get(this.$route.query.id);
 
         this.formData = result.data;
+
+        await this.getDataLembaga();
       } catch (err) {
         const toast = {
           message: 'Terjadi masalah. Mendapatkan data anggaran tidak berhasil',
