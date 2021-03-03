@@ -14,6 +14,10 @@ export class AuthService {
         { withCredentials: true },
       );
 
+      const role = parseTokenData(response.data.data.accessToken).role;
+
+      if (role != 'Admin') return 401;
+
       _setAuthData({
         accessToken: response.data.data.accessToken,
         refreshToken: response.data.data.refreshToken,

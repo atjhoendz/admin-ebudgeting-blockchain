@@ -102,12 +102,18 @@ export default {
 
       this.showLoading = !this.showLoading;
       try {
-        await AuthService.makeLogin({
+        const result = await AuthService.makeLogin({
           username: this.username,
           password: this.password,
         });
+
         this.showLoading = false;
-        await this.$router.push('/');
+
+        if (result == 401)
+          return (this.message =
+            'Login tidak berhasil. Anda tidak memiliki akses.');
+
+        return await this.$router.push('/');
       } catch (err) {
         this.showLoading = false;
         if (err.response.data.statusCode == 401) {
