@@ -96,3 +96,38 @@ export const penomoranValidations = {
     },
   },
 };
+
+export const pmkValidations = {
+  formData: {
+    nama_kategori: {
+      required,
+    },
+    tahun: {
+      required,
+      numeric,
+      validTahun: tahun => {
+        const currentYear = new Date().getFullYear();
+        return tahun >= 1900 && tahun <= parseInt(currentYear) + 3;
+      },
+    },
+    jenis_pmk: {
+      required,
+    },
+    jenis_tiket: {
+      required,
+    },
+    asal: {
+      required,
+    },
+    tujuan: {
+      required,
+    },
+    nama_provinsi: {
+      required,
+    },
+    biaya: {
+      required,
+      numeric,
+    },
+  },
+};
