@@ -121,6 +121,10 @@ export default {
       this.readOnly = false;
     },
     async updateData() {
+      this.$v.formData.$touch();
+
+      if (this.$v.formData.$invalid) return;
+
       this.isLoading = true;
 
       try {
