@@ -65,4 +65,14 @@ export class AnggaranService extends BaseService {
       throw err.response.data;
     }
   }
+
+  static async getCountData() {
+    try {
+      const data = await this.getAll();
+
+      return data.length;
+    } catch (err) {
+      throw err;
+    }
+  }
 }
