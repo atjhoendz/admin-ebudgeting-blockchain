@@ -199,6 +199,7 @@ export const routes = [
     name: 'Data PMK',
     redirect: '/data-pmk',
     component: TheContainer,
+    meta: { isAuth: true },
     children: [
       {
         path: '/',
