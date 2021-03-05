@@ -1,12 +1,10 @@
 import cookie from 'vue-cookies';
-// import { parseTokenData } from '../../services/auth.service';
 
 export default {
   namespaced: true,
   state: {
     accessToken: cookie.get('Authentication') || '',
     refreshToken: cookie.get('Refresh') || '',
-    // accessTokenExpDate: parseTokenData(cookie.get('Authentication'))?.exp || '',
     accessTokenExpDate: '',
   },
 

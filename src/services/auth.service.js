@@ -4,6 +4,7 @@ import { API_URL } from '../.env';
 import $store from '../store';
 import $router from '../router';
 import { Http } from '../services/http.init';
+import cookie from 'vue-cookies';
 
 export class AuthService {
   static async makeLogin({ username, password }) {
@@ -59,7 +60,6 @@ export class AuthService {
 
       return response.data;
     } catch (err) {
-      console.log(err.response.status);
       _resetAuthData();
       $router.push({ name: 'Login' }).catch(() => {});
     }
@@ -81,7 +81,8 @@ export class AuthService {
   }
 
   static hasRefreshToken() {
-    return Boolean(localStorage.getItem('refreshToken'));
+    // return Boolean(localStorage.getItem('refreshToken'));
+    return Boolean($store.state.auth.refreshToken);
   }
 
   static setRefreshToken(status) {
@@ -127,6 +128,7 @@ function _resetAuthData() {
   $store.commit('auth/SET_REFRESH_TOKEN', null);
 
   AuthService.setRefreshToken('');
+  cookie.keys().forEach(key => cookie.remove(key)); // delete
 }
 
 function _setAuthData({ accessToken, refreshToken = null, exp } = {}) {
@@ -136,5 +138,5 @@ function _setAuthData({ accessToken, refreshToken = null, exp } = {}) {
   $store.commit('auth/SET_ACCESS_TOKEN', accessToken);
   if (refreshToken) $store.commit('auth/SET_REFRESH_TOKEN', refreshToken);
   $store.commit('auth/SET_ATOKEN_EXP_DATE', exp);
-  AuthService.setRefreshToken('true');
+  // AuthService.setRefreshToken('true');
 }

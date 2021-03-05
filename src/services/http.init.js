@@ -23,8 +23,7 @@ export class Http {
             AuthService.hasRefreshToken()
           ) {
             return AuthService.debounceRefreshToken()
-              .then(response => {
-                AuthService.setBearer(response.data.data.accessToken);
+              .then(() => {
                 request.headers.Authorization = AuthService.getBearer();
 
                 return request;
