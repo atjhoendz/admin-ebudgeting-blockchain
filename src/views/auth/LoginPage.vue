@@ -18,7 +18,7 @@
                 <CForm>
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
-                  <p class="text-danger">{{ message }}</p>
+                  <p class="text-danger" v-if="message">{{ message }}</p>
                   <CInput
                     placeholder="Username"
                     autocomplete="username"
@@ -107,20 +107,17 @@ export default {
           password: this.password,
         });
 
-        this.showLoading = false;
-
         if (result == 401)
           return (this.message =
             'Login tidak berhasil. Anda tidak memiliki akses.');
 
         return await this.$router.push('/');
       } catch (err) {
-        this.showLoading = false;
-        if (err.response.data.statusCode == 401) {
-          this.message =
-            'Login tidak berhasil. Periksa kembali username/password anda.';
-        }
+        this.message =
+          'Login tidak berhasil. Periksa kembali username/password anda.';
       }
+
+      this.showLoading = false;
     },
   },
 };
