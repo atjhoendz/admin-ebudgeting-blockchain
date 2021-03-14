@@ -1,5 +1,6 @@
 # Admin E-Budgeting Blockchain
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/44b3095c-9d0d-4f0c-9952-af69a417a110/deploy-status)](https://app.netlify.com/sites/admin-ebudgeting/deploys)
 ## Description
 
 Admin Page E-Budgeting Blockchain using Core UI
