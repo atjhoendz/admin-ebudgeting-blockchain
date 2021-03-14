@@ -24,11 +24,3 @@ npm run test:unit
 npm run test:e2e
 
 ```
-
-### Documentation
-
-CoreUI tools documentation:
-
-- Components documentation: [CoreUI Vue library](https://coreui.io/vue/docs)
-- Styles documentation: [CoreUI styles](https://coreui.io/docs/3.0-beta/)
-- Icons documentation: [CoreUI Icons](http://coreui.io/icons)
