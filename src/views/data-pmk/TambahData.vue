@@ -60,8 +60,8 @@
         </CCol>
         <CCol col="12">
           <CInput
-            label="Asal"
-            placeholder="Masukkan asal"
+            label="Asal Keberangkatan"
+            placeholder="Masukkan asal keberangkatan"
             v-model.trim="$v.formData.asal.$model"
             :is-valid="validate('asal')"
             invalid-feedback="Asal harus diisi."
@@ -70,8 +70,8 @@
         </CCol>
         <CCol col="12">
           <CInput
-            label="Tujuan"
-            placeholder="Masukkan tujuan"
+            label="Tujuan Perjalanan"
+            placeholder="Masukkan tujuan perjalanan"
             v-model.trim="$v.formData.tujuan.$model"
             :is-valid="validate('tujuan')"
             invalid-feedback="Tujuan harus diisi."
