@@ -44,13 +44,6 @@ export const userValidations = {
       sameAs: sameAs('password'),
     },
   },
-  passwordLama: {
-    required,
-    minLength: minLength(6),
-    goodPassword: password => {
-      return /[a-z]/.test(password) && /[0-9]/.test(password);
-    },
-  },
 };
 
 export const provinsiValidations = {

@@ -79,25 +79,21 @@
             <CRow>
               <CCol sm="12">
                 <CInput
-                  label="Password Lama"
-                  placeholder="Masukkan password lama"
-                  type="password"
-                  v-model.trim="$v.passwordLama.$model"
-                  :is-valid="validate('passwordLama')"
-                  :invalid-feedback="passwordLamaMsg"
-                ></CInput>
-              </CCol>
-            </CRow>
-            <CRow>
-              <CCol sm="12">
-                <CInput
                   label="Password Baru"
                   placeholder="Masukkan password baru"
-                  type="password"
+                  :type="typePwdBaru"
                   v-model.trim="$v.passwordBaru.password.$model"
                   :is-valid="validate('password')"
                   :invalid-feedback="passwordBaruMsg"
                 >
+                  <template #append-content>
+                    <div
+                      @click="isPwdBaruShow = !isPwdBaruShow"
+                      class="inputPwdBaru"
+                    >
+                      {{ isPwdBaruShow ? 'hide' : 'show' }}
+                    </div>
+                  </template>
                 </CInput>
               </CCol>
             </CRow>
@@ -106,11 +102,20 @@
                 <CInput
                   label="Konfirmasi Password Baru"
                   placeholder="Masukkan ulang password baru"
-                  type="password"
+                  :type="typePwdConfirm"
                   v-model.trim="$v.passwordBaru.konfirmasi.$model"
                   :is-valid="validate('konfirmasi')"
                   invalid-feedback="Konfirmasi password tidak sama."
+                  @keyup.enter="updatePassword()"
                 >
+                  <template #append-content>
+                    <div
+                      @click="isPwdConfirmShow = !isPwdConfirmShow"
+                      class="inputPwdConfirm"
+                    >
+                      {{ isPwdConfirmShow ? 'hide' : 'show' }}
+                    </div>
+                  </template>
                 </CInput>
               </CCol>
             </CRow>
@@ -152,7 +157,6 @@ export default {
         nip: '',
         jabatan: '',
       },
-      passwordLama: '',
       passwordBaru: {
         password: '',
         konfirmasi: '',
@@ -161,6 +165,8 @@ export default {
       showLoadingPassword: false,
       listToasts: [],
       readOnly: true,
+      isPwdBaruShow: false,
+      isPwdConfirmShow: false,
     };
   },
   validations: userValidations,
@@ -196,18 +202,16 @@ export default {
       }
       return null;
     },
-    passwordLamaMsg() {
-      if (!this.$v.passwordLama.required) {
-        return ValidationMessage.required('Password Lama');
-      } else if (!this.$v.passwordLama.minLength) {
-        return ValidationMessage.minLength(6);
-      } else if (!this.$v.passwordLama.goodPassword) {
-        return ValidationMessage.password('huruf', 'angka');
-      }
-      return null;
-    },
     isError() {
       return this.error ? 'danger' : 'success';
+    },
+    typePwdBaru() {
+      if (this.isPwdBaruShow) return 'text';
+      return 'password';
+    },
+    typePwdConfirm() {
+      if (this.isPwdConfirmShow) return 'text';
+      return 'password';
     },
   },
   methods: {
@@ -276,18 +280,14 @@ export default {
     },
     async updatePassword() {
       this.$v.passwordBaru.$touch();
-      this.$v.passwordLama.$touch();
 
-      if (this.$v.passwordBaru.$invalid || this.$v.passwordLama.$invalid)
-        return;
+      if (this.$v.passwordBaru.$invalid) return;
 
       this.showLoadingPassword = true;
       try {
         const id = this.$route.query.id;
-        const password_lama = this.passwordLama;
         this.formData.password = this.passwordBaru.password;
-        const dataPwd = { password_lama, ...this.formData };
-        const response = await UsersService.updatePassword(id, dataPwd);
+        const response = await UsersService.updatePassword(id, this.formData);
 
         const toast = {
           message: response.message,
@@ -313,4 +313,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.inputPwdBaru:hover,
+.inputPwdConfirm:hover {
+  cursor: pointer;
+}
+</style>

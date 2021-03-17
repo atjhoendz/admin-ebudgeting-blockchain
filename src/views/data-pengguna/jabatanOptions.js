@@ -4,4 +4,5 @@ export const options = [
   { label: 'Admin Keuangan', value: 'AdminKeuangan' },
   { label: 'Kepala Keuangan', value: 'KepalaKeuangan' },
   { label: 'Kepala Biro AUPK', value: 'KepalaBiroAUPK' },
+  { label: 'Pemohon', value: 'Pemohon' },
 ];
