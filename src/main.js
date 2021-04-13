@@ -6,12 +6,10 @@ import router from './router';
 import CoreuiVue from '@coreui/vue';
 import { iconsSet as icons } from './assets/icons/icons.js';
 import store from './store';
-import vueCookies from 'vue-cookies';
 import Vuelidate from 'vuelidate';
 
 Vue.config.performance = true;
 Vue.use(CoreuiVue);
-Vue.use(vueCookies);
 Vue.use(Vuelidate);
 Vue.prototype.$log = console.log.bind(console);
 
