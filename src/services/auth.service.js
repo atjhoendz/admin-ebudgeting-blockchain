@@ -86,6 +86,7 @@ export function parseTokenData(accessToken) {
 }
 
 function _resetAuthData() {
+  $store.commit('user/RESET');
   localStorage.removeItem('refreshToken');
 }
 
