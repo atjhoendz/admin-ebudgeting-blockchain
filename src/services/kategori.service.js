@@ -1,14 +1,14 @@
 /* eslint-disable no-useless-catch */
-import { BaseService } from './base.service';
+import axiosService from './axios.service';
 
-export class KategoriService extends BaseService {
+export class KategoriService {
   static get entity() {
     return 'kategori';
   }
 
   static async getAll() {
     try {
-      const response = await this.request({ auth: true }).get(this.entity);
+      const response = await axiosService.get(this.entity);
 
       return response.data.data;
     } catch (err) {
@@ -18,10 +18,7 @@ export class KategoriService extends BaseService {
 
   static async addData(formData) {
     try {
-      const response = await this.request({ auth: true }).post(
-        this.entity,
-        formData,
-      );
+      const response = await axiosService.post(this.entity, formData);
 
       return response.data;
     } catch (err) {
@@ -31,9 +28,7 @@ export class KategoriService extends BaseService {
 
   static async get(id) {
     try {
-      const response = await this.request({ auth: true }).get(
-        `${this.entity}/${id}`,
-      );
+      const response = await axiosService.get(`${this.entity}/${id}`);
 
       return response.data;
     } catch (err) {
@@ -43,10 +38,7 @@ export class KategoriService extends BaseService {
 
   static async update(id, formData) {
     try {
-      const response = await this.request({ auth: true }).put(
-        `${this.entity}/${id}`,
-        formData,
-      );
+      const response = await axiosService.put(`${this.entity}/${id}`, formData);
 
       return response.data;
     } catch (err) {
@@ -56,9 +48,7 @@ export class KategoriService extends BaseService {
 
   static async delete(id) {
     try {
-      const response = await this.request({ auth: true }).delete(
-        `${this.entity}/${id}`,
-      );
+      const response = await axiosService.delete(`${this.entity}/${id}`);
 
       return response.data;
     } catch (err) {
