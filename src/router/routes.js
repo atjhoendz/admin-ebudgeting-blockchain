@@ -3,6 +3,7 @@ const TheContainer = () => import('@/containers/TheContainer');
 
 // Views
 const Dashboard = () => import('@/views/Dashboard');
+const NotFoundPage = () => import('@/views/NotFoundPage');
 const Login = () => import('@/views/auth/LoginPage');
 
 // Data Pengguna
@@ -221,5 +222,10 @@ export const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '*',
+    name: 'NotFoundPage',
+    component: NotFoundPage,
   },
 ];
