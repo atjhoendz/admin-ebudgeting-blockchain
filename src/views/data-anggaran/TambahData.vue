@@ -60,6 +60,7 @@ export default {
       isLoading: false,
       listToasts: [],
       readOnly: true,
+      dataLembaga: [],
     };
   },
   validations: anggaranValidations,
@@ -88,14 +89,14 @@ export default {
       this.isLoading = true;
 
       try {
-        const dataLembaga = await LembagaService.getAll();
+        this.dataLembaga = await LembagaService.getAll();
         const dataAnggaran = await AnggaranService.getAll();
 
         const namaLembagaInAnggaran = dataAnggaran.map(item => {
           return item.Record.nama_lembaga;
         });
 
-        this.options = dataLembaga
+        this.options = this.dataLembaga
           .filter(item => {
             return !namaLembagaInAnggaran.includes(item.Record.nama);
           })
@@ -144,6 +145,14 @@ export default {
         this.listToasts.push(toast);
       }
       this.isLoading = false;
+    },
+  },
+  watch: {
+    'formData.nama_lembaga': function(newVal) {
+      const dataLembaga = this.dataLembaga.find(
+        item => item.Record.nama == newVal,
+      );
+      this.formData.sisa_anggaran = dataLembaga.Record.jumlah_anggaran;
     },
   },
   async mounted() {
