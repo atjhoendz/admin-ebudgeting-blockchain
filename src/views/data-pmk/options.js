@@ -3,6 +3,10 @@ export const jenisOptions = [
     label: 'Tiket Pesawat Dalam Negeri',
     value: 'Tiket Pesawat Dalam Negeri',
   },
+  {
+    label: 'Tiket Kereta',
+    value: 'Tiket Kereta',
+  },
 ];
 
 export const golonganOptions = [];
